@@ -1,28 +1,45 @@
 <template>
   <div class="page">
     <div class="input-box">
-      <input type="text" placeholder="请输入任务名称" class="input" />
+      <input
+        v-model="inputVal"
+        type="text"
+        placeholder="请输入任务名称"
+        class="input"
+        @keyup.enter="onConfirm"
+      />
+      <button class="confirm" @click="onConfirm">确认</button>
     </div>
     <ul class="list-box">
-      <li class="item">
-        <input id="todo1" type="checkbox" class="checkbox" />
-        <label for="todo1" class="label">吃饭</label>
-      </li>
-      <li class="item">
-        <input id="todo2" type="checkbox" class="checkbox" />
-        <label for="todo2" class="label">洗澡</label>
+      <li v-for="(item, index) in todoList" :key="index" class="item">
+        <input :id="item.id" type="checkbox" class="checkbox" />
+        <label :for="item.id" class="label">{{ item.name }}</label>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
-// const inputVal = ref<string>('')
-// const todoList = reactive([])
+interface todo {
+  id: string
+  name: string
+}
 
-// console.log(todoList)
+const inputVal = ref<string>('')
+const todoList = ref<todo[]>([])
+const todoIndex = ref<number>(0)
+
+const onConfirm = () => {
+  todoList.value.push({
+    id: `todo${todoIndex.value}`,
+    name: inputVal.value,
+  })
+
+  inputVal.value = ''
+  todoIndex.value += 1
+}
 </script>
 
 <style lang="scss">
@@ -40,8 +57,10 @@ ul li {
   padding: 60px;
 
   .input-box {
+    position: relative;
     height: 30px;
-    padding: 0 15px;
+    padding-left: 15px;
+    padding-right: 80px;
     line-height: 30px;
     border: 1px solid #d8d8d8;
     border-radius: 8px;
@@ -58,6 +77,18 @@ ul li {
 
     input::-webkit-input-placeholder {
       color: #999;
+    }
+
+    .confirm {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      padding: 0 20px;
+      font-size: 14px;
+      color: #fff;
+      background: #8888f8;
+      border: none;
     }
   }
 
