@@ -20,6 +20,7 @@ module.exports = {
     'plugin:jest/recommended',
   ],
   rules: {
+    'func-names': ['error', 'never'],
     'import/no-extraneous-dependencies': [
       'error',
       {
