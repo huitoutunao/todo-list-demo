@@ -12,8 +12,11 @@
     </div>
     <ul class="list-box">
       <li v-for="(item, index) in todoList" :key="index" class="item">
-        <input :id="item.id" type="checkbox" class="checkbox" />
-        <label :for="item.id" class="label">{{ item.name }}</label>
+        <div class="check-box">
+          <input :id="item.id" type="checkbox" class="checkbox" />
+          <label :for="item.id" class="label">{{ item.name }}</label>
+        </div>
+        <button class="del" @click="onDel(index)">删除</button>
       </li>
     </ul>
   </div>
@@ -39,6 +42,10 @@ const onConfirm = () => {
 
   inputVal.value = ''
   todoIndex.value += 1
+}
+
+const onDel = (index: number) => {
+  todoList.splice(index, 1)
 }
 </script>
 
@@ -89,6 +96,7 @@ ul li {
       color: #fff;
       background: #8888f8;
       border: none;
+      cursor: pointer;
     }
   }
 
@@ -96,6 +104,7 @@ ul li {
     padding: 15px 10px;
 
     .item {
+      position: relative;
       display: flex;
       align-items: center;
       padding: 5px 0;
@@ -103,15 +112,32 @@ ul li {
       color: #333;
     }
 
-    .checkbox {
-      width: 18px;
-      height: 18px;
+    .check-box {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      overflow: hidden;
+
+      .checkbox {
+        width: 18px;
+        height: 18px;
+        margin-bottom: -2px;
+      }
+
+      .label {
+        flex: 1;
+        padding-left: 5px;
+        overflow: hidden;
+      }
     }
 
-    .label {
-      flex: 1;
-      padding-left: 5px;
-      overflow: hidden;
+    .del {
+      padding: 5px 15px;
+      font-size: 12px;
+      color: red;
+      background: #fff;
+      border: 1px solid red;
+      cursor: pointer;
     }
   }
 }
