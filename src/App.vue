@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 interface todo {
   id: string
@@ -28,11 +28,11 @@ interface todo {
 }
 
 const inputVal = ref<string>('')
-const todoList = ref<todo[]>([])
+const todoList = reactive<todo[]>([])
 const todoIndex = ref<number>(0)
 
 const onConfirm = () => {
-  todoList.value.push({
+  todoList.push({
     id: `todo${todoIndex.value}`,
     name: inputVal.value,
   })
