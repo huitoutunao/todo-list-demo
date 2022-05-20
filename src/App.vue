@@ -14,11 +14,13 @@
       <li v-for="(item, index) in todoList" :key="index" class="item">
         <div class="check-box">
           <input :id="item.id" v-model="item.checked" type="checkbox" class="checkbox" />
-          <label :for="item.id" :class="['label', { checked: item.checked }]">{{
-            item.name
-          }}</label>
+          <label :for="item.id" :class="['label', { checked: item.checked }]">
+            <span class="word">{{ item.name }}</span>
+          </label>
         </div>
-        <button class="del" @click="onDel(index)">删除</button>
+        <button class="del" @click="onDel(index)">
+          <i class="iconfont iconshanchu"></i>
+        </button>
       </li>
     </ul>
   </div>
@@ -66,6 +68,8 @@ const onDel = (index: number) => {
 </script>
 
 <style lang="scss">
+@import '@/assets/font/iconfont.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -127,9 +131,10 @@ ul li {
       position: relative;
       display: flex;
       align-items: center;
-      padding: 5px 0;
+      padding: 10px 0;
       font-size: 18px;
       color: #333;
+      border-bottom: 1px solid #eee;
 
       &:hover {
         .del {
@@ -140,27 +145,45 @@ ul li {
     }
 
     .check-box {
+      position: relative;
       display: flex;
       align-items: center;
       flex: 1;
       overflow: hidden;
 
       .checkbox {
-        width: 18px;
-        height: 18px;
-        margin-bottom: -2px;
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+
+        &:checked + label::before {
+          color: #8888f8;
+        }
       }
 
       .label {
-        flex: 1;
-        padding-left: 5px;
-        color: #333;
+        display: flex;
+        align-items: center;
+        width: 100%;
         overflow: hidden;
-        transition: all 0.2s ease;
 
-        &.checked {
+        &::before {
+          content: '\e647';
+          display: block;
+          padding-right: 10px;
+          font-family: 'iconfont';
+          font-size: 24px;
+          color: #eee;
+          transition: all 0.2s ease;
+        }
+
+        &.checked .word {
           color: #d8d8d8;
           text-decoration: line-through;
+        }
+
+        .word {
+          color: #333;
+          transition: all 0.2s ease;
         }
       }
     }
@@ -170,11 +193,15 @@ ul li {
       font-size: 12px;
       color: red;
       background: #fff;
-      border: 1px solid red;
+      border: none;
       opacity: 0;
       visibility: hidden;
       transition: all 0.2s ease;
       cursor: pointer;
+
+      .iconshanchu {
+        font-size: 20px;
+      }
     }
   }
 }
