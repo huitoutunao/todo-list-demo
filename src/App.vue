@@ -18,16 +18,23 @@
             <span class="word">{{ item.name }}</span>
           </label>
         </div>
-        <button class="del" @click="onDel(index)">
+        <button class="action-btn" @click="onEdit(index)">
+          <i class="iconfont iconbianji"></i>
+        </button>
+        <button class="action-btn" @click="onDel(index)">
           <i class="iconfont iconshanchu"></i>
         </button>
       </li>
     </ul>
+    <MyDialog v-show="isShowDialog" :edit-val="editVal"></MyDialog>
+    <MyOverlay v-show="isShowDialog"></MyOverlay>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, watchEffect } from 'vue'
+import MyDialog from '@/components/my-dialog/Index.vue'
+import MyOverlay from '@/components/my-overlay/Index.vue'
 
 interface todo {
   id: string
@@ -60,6 +67,13 @@ const onConfirm = () => {
 
   inputVal.value = ''
   todoIndex.value += 1
+}
+
+const editVal = ref<string>('')
+const isShowDialog = ref<boolean>(false)
+const onEdit = (index: number) => {
+  editVal.value = todoList[index].name
+  isShowDialog.value = true
 }
 
 const onDel = (index: number) => {
@@ -137,7 +151,7 @@ ul li {
       border-bottom: 1px solid #eee;
 
       &:hover {
-        .del {
+        .action-btn {
           opacity: 1;
           visibility: visible;
         }
@@ -164,11 +178,11 @@ ul li {
         display: flex;
         align-items: center;
         width: 100%;
-        overflow: hidden;
 
         &::before {
           content: '\e647';
           display: block;
+          padding-left: 5px;
           padding-right: 10px;
           font-family: 'iconfont';
           font-size: 24px;
@@ -188,7 +202,7 @@ ul li {
       }
     }
 
-    .del {
+    .action-btn {
       padding: 5px 15px;
       font-size: 12px;
       color: red;
@@ -197,9 +211,14 @@ ul li {
       opacity: 0;
       visibility: hidden;
       transition: all 0.2s ease;
-      cursor: pointer;
+
+      .iconbianji {
+        color: #3636f0;
+        font-size: 22px;
+      }
 
       .iconshanchu {
+        color: red;
         font-size: 20px;
       }
     }
