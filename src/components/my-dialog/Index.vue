@@ -8,7 +8,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-console.log('传入值')
 const title = ref('提示')
 const editVal = ref('')
 </script>
