@@ -26,7 +26,12 @@
         </button>
       </li>
     </ul>
-    <MyDialog v-show="isShowDialog" :edit-val="editVal"></MyDialog>
+    <MyDialog
+      v-show="isShowDialog"
+      :edit-val="editVal"
+      :edit-index="editIndex"
+      @change="changeDialogVal"
+    ></MyDialog>
     <MyOverlay v-show="isShowDialog"></MyOverlay>
   </div>
 </template>
@@ -70,10 +75,16 @@ const onConfirm = () => {
 }
 
 const editVal = ref<string>('')
+const editIndex = ref<number>(0)
 const isShowDialog = ref<boolean>(false)
 const onEdit = (index: number) => {
+  editIndex.value = index
   editVal.value = todoList[index].name
   isShowDialog.value = true
+}
+
+const changeDialogVal = (v: string, index: number) => {
+  todoList[index].name = v
 }
 
 const onDel = (index: number) => {
