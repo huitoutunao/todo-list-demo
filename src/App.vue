@@ -30,7 +30,7 @@
       v-show="isShowDialog"
       :edit-val="editVal"
       :edit-index="editIndex"
-      @change="changeDialogVal"
+      @confirm="confirmDialogVal"
     ></MyDialog>
     <MyOverlay v-show="isShowDialog"></MyOverlay>
   </div>
@@ -83,8 +83,9 @@ const onEdit = (index: number) => {
   isShowDialog.value = true
 }
 
-const changeDialogVal = (v: string, index: number) => {
+const confirmDialogVal = (v: string, index: number) => {
   todoList[index].name = v
+  isShowDialog.value = false
 }
 
 const onDel = (index: number) => {
