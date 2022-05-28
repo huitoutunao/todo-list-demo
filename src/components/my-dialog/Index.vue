@@ -14,10 +14,6 @@ import { ref } from 'vue'
 
 const title = ref('提示')
 const props = defineProps({
-  editVal: {
-    type: String,
-    default: '',
-  },
   editIndex: {
     type: Number,
     default: 0,
