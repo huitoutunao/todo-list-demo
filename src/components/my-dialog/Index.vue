@@ -21,7 +21,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['confirm'])
 
-const inputVal = ref('')
+const inputVal = ref<string>('')
 const onSubmit = () => {
   emit('confirm', inputVal, props.editIndex)
 }

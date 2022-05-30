@@ -15,7 +15,7 @@
         <div class="check-box">
           <input :id="item.id" v-model="item.checked" type="checkbox" class="checkbox" />
           <label :for="item.id" :class="['label', { checked: item.checked }]">
-            <span class="word">{{ item.name }}</span>
+            <span class="word">{{ item.text }}</span>
           </label>
         </div>
         <button class="action-btn" @click="onEdit(index)">
@@ -32,13 +32,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watchEffect } from 'vue'
+import { ref, Ref, unref, reactive, watchEffect } from 'vue'
 import MyDialog from '@/components/my-dialog/Index.vue'
 import MyOverlay from '@/components/my-overlay/Index.vue'
 
 interface todo {
   id: string
-  name: string
+  text: string
   checked: boolean
 }
 
@@ -61,7 +61,7 @@ const onConfirm = () => {
 
   todoList.push({
     id: `todo${todoIndex.value}`,
-    name: inputVal.value,
+    text: inputVal.value,
     checked: false,
   })
 
@@ -76,8 +76,8 @@ const onEdit = (index: number) => {
   isShowDialog.value = true
 }
 
-const confirmDialogVal = (v: string, index: number) => {
-  todoList[index].name = v
+const confirmDialogVal = (v: string | Ref<string>, index: number) => {
+  todoList[index].text = unref(v)
   isShowDialog.value = false
 }
 
