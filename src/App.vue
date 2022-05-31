@@ -27,14 +27,12 @@
       </li>
     </ul>
     <MyDialog v-show="isShowDialog" :edit-index="editIndex" @confirm="confirmDialogVal"></MyDialog>
-    <MyOverlay v-show="isShowDialog"></MyOverlay>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, watchEffect } from 'vue'
 import MyDialog from '@/components/my-dialog/Index.vue'
-import MyOverlay from '@/components/my-overlay/Index.vue'
 
 interface todo {
   id: string

@@ -1,17 +1,25 @@
 <template>
   <div class="my-overlay">
-    <h1>{{ title }}</h1>
+    <!--  -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted } from 'vue'
 
-const title = ref('遮罩层')
+onMounted(() => {
+  // 遮罩层
+})
 </script>
 
 <style lang="scss" scoped>
 .my-overlay {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
 }
 </style>
