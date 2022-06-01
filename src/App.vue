@@ -75,7 +75,9 @@ const onEdit = (index: number) => {
 }
 
 const confirmDialogVal = (v: string | Ref<string>, index: number) => {
-  todoList[index].text = unref(v)
+  if (unref(v)) {
+    todoList[index].text = unref(v)
+  }
   isShowDialog.value = false
 }
 

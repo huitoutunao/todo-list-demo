@@ -1,12 +1,11 @@
 <template>
   <div class="my-dialog">
     <div class="dialog-content">
-      <h1>{{ title }}</h1>
-      <p>待修改的值：</p>
-      <form action="." @submit.prevent="onSubmit">
-        <input v-model="inputVal" type="text" placeholder="请输入修改任务名称" />
-        <button type="submit">确认</button>
-      </form>
+      <div class="dialog-title">{{ title }}</div>
+      <div class="dialog-input">
+        <input v-model="inputVal" type="text" placeholder="请编辑任务名称" class="input" />
+      </div>
+      <button class="dialog-confirm" @click="onSubmit">确认</button>
     </div>
     <MyOverlay></MyOverlay>
   </div>
@@ -40,10 +39,47 @@ const onSubmit = () => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 30px;
+    z-index: 9;
+    width: 300px;
+    padding: 15px;
     background-color: #fff;
     border-radius: 10px;
-    z-index: 9;
+    box-sizing: border-box;
+
+    .dialog-title {
+      line-height: 30px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .dialog-input {
+      height: 45px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #eee;
+
+      .input {
+        width: 100%;
+        height: 100%;
+        line-height: 45px;
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .dialog-confirm {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+      background-color: #6f6ff8;
+      border-radius: 20px;
+      border: none;
+    }
   }
 }
 </style>
