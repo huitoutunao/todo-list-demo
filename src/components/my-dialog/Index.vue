@@ -1,5 +1,5 @@
 <template>
-  <div v-show="showDialog" class="my-dialog">
+  <div v-show="show" class="my-dialog">
     <div class="dialog-content">
       <div class="dialog-title">{{ title }}</div>
       <div class="dialog-input">
@@ -7,7 +7,7 @@
       </div>
       <button class="dialog-confirm" @click="onSubmit">确认</button>
     </div>
-    <MyOverlay></MyOverlay>
+    <MyOverlay @click="closeOverlay"></MyOverlay>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import MyOverlay from '@/components/my-overlay/Index.vue'
 
 const title = ref('提示')
 const props = defineProps({
-  showDialog: {
+  show: {
     type: Boolean,
     default: false,
   },
@@ -27,7 +27,7 @@ const props = defineProps({
     default: 0,
   },
 })
-const emit = defineEmits(['confirm'])
+const emit = defineEmits(['confirm', 'closeOverlay'])
 
 const inputVal = ref<string>('')
 const onSubmit = () => {
@@ -35,13 +35,17 @@ const onSubmit = () => {
 }
 
 watch(
-  () => props.showDialog,
+  () => props.show,
   (nVal) => {
     if (nVal) {
       inputVal.value = ''
     }
   }
 )
+
+const closeOverlay = () => {
+  emit('closeOverlay', !props.show)
+}
 </script>
 
 <style lang="scss" scoped>

@@ -27,9 +27,10 @@
       </li>
     </ul>
     <MyDialog
-      :show-dialog="isShowDialog"
+      :show="isShowDialog"
       :edit-index="editIndex"
       @confirm="confirmDialogVal"
+      @close-overlay="closeOverlay"
     ></MyDialog>
   </div>
 </template>
@@ -82,6 +83,10 @@ const confirmDialogVal = (v: string | Ref<string>, index: number) => {
   if (unref(v)) {
     todoList[index].text = unref(v)
   }
+  isShowDialog.value = false
+}
+
+const closeOverlay = () => {
   isShowDialog.value = false
 }
 
