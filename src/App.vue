@@ -26,7 +26,11 @@
         </button>
       </li>
     </ul>
-    <MyDialog v-show="isShowDialog" :edit-index="editIndex" @confirm="confirmDialogVal"></MyDialog>
+    <MyDialog
+      :show-dialog="isShowDialog"
+      :edit-index="editIndex"
+      @confirm="confirmDialogVal"
+    ></MyDialog>
   </div>
 </template>
 

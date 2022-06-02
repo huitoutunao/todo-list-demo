@@ -1,5 +1,5 @@
 <template>
-  <div class="my-dialog">
+  <div v-show="showDialog" class="my-dialog">
     <div class="dialog-content">
       <div class="dialog-title">{{ title }}</div>
       <div class="dialog-input">
@@ -12,11 +12,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import MyOverlay from '@/components/my-overlay/Index.vue'
 
 const title = ref('提示')
 const props = defineProps({
+  showDialog: {
+    type: Boolean,
+    default: false,
+  },
+
   editIndex: {
     type: Number,
     default: 0,
@@ -28,6 +33,15 @@ const inputVal = ref<string>('')
 const onSubmit = () => {
   emit('confirm', inputVal, props.editIndex)
 }
+
+watch(
+  () => props.showDialog,
+  (nVal) => {
+    if (nVal) {
+      inputVal.value = ''
+    }
+  }
+)
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +67,7 @@ const onSubmit = () => {
     }
 
     .dialog-input {
-      height: 45px;
+      height: 40px;
       margin-bottom: 30px;
       border-bottom: 1px solid #eee;
 
@@ -61,8 +75,7 @@ const onSubmit = () => {
         width: 100%;
         height: 100%;
         line-height: 45px;
-        text-align: center;
-        font-size: 16px;
+        font-size: 14px;
         color: #666;
         border: none;
         outline: none;
