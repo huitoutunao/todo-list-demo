@@ -1,5 +1,5 @@
 <template>
-  <div class="my-overlay">
+  <div class="my-overlay animate__animated animate__fadeIn">
     <!--  -->
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  // 遮罩层
+  //
 })
 </script>
 

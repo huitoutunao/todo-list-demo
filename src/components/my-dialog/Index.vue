@@ -1,13 +1,13 @@
 <template>
   <div v-show="show" class="my-dialog">
-    <div class="dialog-content">
+    <div class="dialog-content animate__animated animate__zoomIn">
       <div class="dialog-title">{{ title }}</div>
       <div class="dialog-input">
         <input v-model="inputVal" type="text" placeholder="请编辑任务名称" class="input" />
       </div>
       <button class="dialog-confirm" @click="onSubmit">确认</button>
     </div>
-    <MyOverlay @click="closeOverlay"></MyOverlay>
+    <MyOverlay :show-overlay="show" @click="closeOverlay"></MyOverlay>
   </div>
 </template>
 
