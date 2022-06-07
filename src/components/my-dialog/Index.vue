@@ -50,15 +50,21 @@ const closeOverlay = () => {
 
 <style lang="scss" scoped>
 .my-dialog {
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
 
   .dialog-content {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9;
+    z-index: 2002;
     width: 300px;
+    margin-top: -70px;
+    margin-left: -150px;
     padding: 15px;
     background-color: #fff;
     border-radius: 10px;
