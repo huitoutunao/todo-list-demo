@@ -1,6 +1,11 @@
 <template>
   <div v-show="show" class="my-dialog">
-    <div class="dialog-content animate__animated animate__zoomIn">
+    <div
+      :class="[
+        'dialog-content animate__animated',
+        show ? 'animate__zoomIn animate__faster' : 'animate__zoomOut animate__faster',
+      ]"
+    >
       <div class="dialog-title">{{ title }}</div>
       <div class="dialog-input">
         <input v-model="inputVal" type="text" placeholder="请编辑任务名称" class="input" />
